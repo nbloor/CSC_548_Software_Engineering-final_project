@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tasks</title>
+</head>
+<body>
+    <h2>Tasks</h2>
+    <div>
+        <form action="#" th:action="@{/add}" th:object="${newTask}" method="post">
+            <input type="text" th:field="*{description}" placeholder="Description">
+            <input type="date" th:field="*{dueDate}">
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
+    <div>
+        <ul>
+            <li th:each="task : ${tasks}">
+                <span th:text="${task.description}">Task Description</span> - 
+                <span th:text="${task.dueDate}">Due Date</span>
+                <form th:action="@{/delete}" method="get" style="display: inline;">
+                <input type="hidden" name="id" th:value="${task.id}">
+                <button type="submit">Delete</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
